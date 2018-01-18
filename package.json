@@ -2,8 +2,10 @@
   "name": "googlehome",
   "version": "1.0.0",
   "description": "",
-  "dependencies" : {
-    "google-home-notifier" : "1.2.0"
+  "dependencies": {
+    "azure-storage": "^2.7.0",
+    "google-home-notifier": "1.2.0",
+    "voicetext": "0.0.7"
   },
   "main": "index.js",
   "scripts": {

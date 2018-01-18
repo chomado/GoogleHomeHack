@@ -58,3 +58,4 @@ typings/
 .env
 
 /Keys/*
+/Data/mp3/*
