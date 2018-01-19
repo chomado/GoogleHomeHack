@@ -10,6 +10,8 @@ clone 後、以下 3 つは貴方が自分でやらなければなりません�
 
 ## 動作デモ
 
+必ず見てください！80秒間です
+
 [https://twitter.com/chomado/status/953832898842341376]
 
 ## Background
@@ -31,3 +33,5 @@ googlehome.notify('こんにちは、ちょまどです！', function(res) {
 しかし、今回、私はたくましい男の人に喋ってほしかったので、[VoiceText Web API](https://cloud.voicetext.jp/webapi)を使用しました。
 
 `開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
+
+なので、少しだけ複雑になっていますが、大丈夫です。
