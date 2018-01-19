@@ -8,24 +8,9 @@ clone 後、以下 3 つは貴方が自分でやらなければなりません�
 2. [Microsoft Azure Blob Storage](https://azure.microsoft.com/ja-jp/services/storage/blobs/) (mp3保存場所)のインスタンス立ち上げる
 3. Microsoft Azure Blob Storage (mp3保存場所)の APIキー２つ取得
 
-## Twitter より
+## 動作デモ
 
 [https://twitter.com/chomado/status/953832898842341376]
-
-```
-Google Home って女性の声しか無いんですけど、
-
- 私たくましい男の人に喋ってもらいたかったので
-
-プログラミングしました
-
-Node .jsで書きました。
-
-Voice Text API と
-MSのクラウドサービス Azure Blob Storage 使用
-
-2018年1月18日 @chomado
-```
 
 ## Background
 
