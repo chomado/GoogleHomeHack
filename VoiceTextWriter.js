@@ -12,7 +12,7 @@ class VoiceTextWriter{
         var self = this;
         return new Promise(function(resolve,reject) {
             self.voice
-                .speaker(self.voice.SPEAKER.HIKARI)
+                .speaker(self.voice.SPEAKER.BEAR)
                 .emotion(self.voice.EMOTION.HAPPINESS)
                 .emotion_level(self.voice.EMOTION_LEVEL.HIGH)
                 .volume(150)
