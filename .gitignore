@@ -57,5 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
-/Keys/*
+/Keys/APIKeys.json
 /Data/mp3/*
+.vs

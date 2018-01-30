@@ -1,0 +1,5 @@
+﻿{
+  "voiceText": "Voice Text Web API のアクセスキーを追加",
+  "storageAccount": "Microsoft Azure 上に作ったストレージアカウントの「ストレージ アカウント名」を追加",
+  "accessKey": "Microsoft Azure 上に作ったストレージアカウントの「既定のキー」Key1の「接続文字列」を追加"
+}
