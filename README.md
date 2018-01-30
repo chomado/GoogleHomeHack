@@ -1,13 +1,19 @@
 # Google Home Hack
 Google Home に好きな声で喋らせるものです。
 
-書いたコードは全て上げていますが、    
-clone 後、以下 4 つは貴方が自分でやらなければなりません。（アカウントの都合上）
+書いたコードは全て上げていますが、   
+各種使用サービスの APIキーなど、秘密にするべきものはもちろん public に上げていません。
 
-1. VoiceText Web API の APIキー取得
-2. [ストレージアカウント](https://azure.microsoft.com/ja-jp/services/storage/blobs/) (mp3保存場所)のインスタンス立ち上げる
-3. ストレージアカウント (mp3保存場所)の APIキー２つ取得
-4. APIキーなどが書いてある秘密のファイル(つまり皆に見せちゃダメだよ)の `Keys/APIKeys_sample.json` のファイル名を `APIKeys_sample.json` から `APIKeys.json` に変更。そしてそのファイルをエディタで開いて中身を書き換える。（手順 1 - 3 で取得したキー文字列を入れることになる）
+なので、clone 後、以下の手順を踏む必要があります。
+
+1. 声を変えるために使うサービスのAPIキー入手
+    - [VoiceText Web API](https://cloud.voicetext.jp/webapi) の APIキー取得。（最初の画面の「はじめる」から先に進んだら、登録したメアドにAPIキーが届きます）
+2. VoiceText Web API が吐いた mp3 の保存場所の接続文字列など入手
+    - [ストレージアカウント](https://azure.microsoft.com/ja-jp/services/storage/blobs/) (mp3保存場所)のインスタンス立ち上げる
+	- ストレージアカウント (mp3保存場所)の APIキー２つ取得
+3. 設定ファイル書き換え
+    - APIキーなどが書いてある秘密のファイル(つまり皆に見せちゃダメだよ)の `Keys/APIKeys_sample.json` のファイル名を `APIKeys_sample.json` から `APIKeys.json` に変更。
+    - そしてそのファイルをエディタで開いて中身を書き換える。（上で取得したキー文字列を入れることになる）
 
 ↓ Microsoft Azure で作った「ストレージアカウント」を開くと、最初はこんな画面である。    
 ちなみに、我々は、この「ストレージアカウント」の中の「`Blob (Binary Large OBject) Storage`」という機能だけ使うことになる。現段階では mp3 突っ込むだけなので。
