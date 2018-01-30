@@ -12,7 +12,7 @@ clone 後、以下 4 つは貴方が自分でやらなければなりません�
 ↓ Microsoft Azure で作った「ストレージアカウント」を開くと、最初はこんな画面である。    
 ちなみに、我々は、この「ストレージアカウント」の中の「`Blob (Binary Large OBject) Storage`」という機能だけ使うことになる。現段階では mp3 突っ込むだけなので。
 
-![](Img/ScreenShot/about_storageAccount.png)
+![](Img/ScreenShot/about_storageAccount1.png)
 
 ↓ この左の「アクセスキー」をクリックして、以下２か所からコピーして `Keys/APIKeys.json` に貼り付ける。
 
