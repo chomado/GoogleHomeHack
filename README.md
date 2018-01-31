@@ -8,6 +8,14 @@ Google Home に好きな声で喋らせるものです。
 
 [https://twitter.com/chomado/status/953832898842341376]
 
+## アーキテクチャ
+
+`開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
+
+![](Img/architecture.gif)
+
+![](Img/architecture.png)
+
 ## 動かすために自分でやること
 
 書いたコードは全て上げていますが、   
@@ -24,6 +32,9 @@ Google Home に好きな声で喋らせるものです。
 3. *設定ファイル* 書き換え
     - APIキーなどが書いてある秘密のファイル(つまり皆に見せちゃダメだよ)の `Keys/APIKeys_sample.json` のファイル名を `APIKeys_sample.json` から `APIKeys.json` に変更。
     - そしてそのファイルをエディタで開いて中身を書き換える。（上で取得したキー文字列を入れることになる）
+
+
+### Azure ポータル上での操作
 
 ↓ Microsoft Azure で作った「ストレージアカウント」を開くと、最初はこんな画面である。    
 ちなみに、我々は、この「ストレージアカウント」の中の「`Blob (Binary Large OBject) Storage`」という機能だけ使うことになる。現段階では mp3 突っ込むだけなので。
@@ -56,3 +67,12 @@ googlehome.notify('こんにちは、ちょまどです！', function(res) {
 `開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
 
 なので、少しだけ複雑になっていますが、大丈夫です。
+
+![](Img/architecture.gif)
+
+## Next Step
+
+現在、発火が開発PCから直接 `node main.js` している状態なので、
+
+次は、スマートスピーカーらしく、    
+「Google Home に『声を変えて』と声をかけるなど『声で発火できるように』」させる必要があります
