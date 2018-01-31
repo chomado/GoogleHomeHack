@@ -13,13 +13,7 @@ Google Home に好きな声で喋らせるものです。
 
 `開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
 
-### アニメ版
-
 ![](Img/architecture.gif)
-
-### 静止画版
-
-![](Img/architecture.png)
 
 ## 動かすために自分でやること
 
