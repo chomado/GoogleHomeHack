@@ -1,6 +1,7 @@
 # Google Home Hack
 
-Google Home に好きな声で喋らせるものです。
+Google Home に好きな声で喋らせるものです。     
+(注意) このプロジェクトは clone してもそのまま動きません。APIキーを設定ファイルに書いたりする必要があります。詳しくは下にまとめて書いてあるので読んでください
 
 ## 動作デモ
 
@@ -13,8 +14,6 @@ Google Home に好きな声で喋らせるものです。
 `開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
 
 ![](Img/architecture.gif)
-
-![](Img/architecture.png)
 
 ## 動かすために自分でやること
 
@@ -32,7 +31,7 @@ Google Home に好きな声で喋らせるものです。
 3. *設定ファイル* 書き換え
     - APIキーなどが書いてある秘密のファイル(つまり皆に見せちゃダメだよ)の `Keys/APIKeys_sample.json` のファイル名を `APIKeys_sample.json` から `APIKeys.json` に変更。
     - そしてそのファイルをエディタで開いて中身を書き換える。（上で取得したキー文字列を入れることになる）
-
+4. `VoiceTextWriter.js` の `OUT_PATH` が、今は私の環境のもの（`/Users/chomado/...`）をべた書きしてるけど、これ自分のものに書き換えてください。
 
 ### Azure ポータル上での操作
 
@@ -69,6 +68,11 @@ googlehome.notify('こんにちは、ちょまどです！', function(res) {
 なので、少しだけ複雑になっていますが、大丈夫です。
 
 ![](Img/architecture.gif)
+
+↑ gif アニメ版    
+↓ 静止画版
+
+![](Img/architecture.png)
 
 ## Next Step
 
