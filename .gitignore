@@ -60,4 +60,3 @@ typings/
 /Keys/APIKeys.json
 /Data/mp3/*
 .vs
-package-lock.json

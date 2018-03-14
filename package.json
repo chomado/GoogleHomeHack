@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "actions-on-google": "^1.9.0",
     "azure-storage": "^2.7.0",
-    "express": "^4.16.2",
     "google-home-notifier": "1.2.0",
     "voicetext": "0.0.7"
   },
