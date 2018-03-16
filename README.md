@@ -8,6 +8,7 @@ Google Assistant 系のアプリは Node.js でやってる人が多いのです
 
 ## 動作デモ動画
 
+![](Img/video.png)
 [https://twitter.com/chomado/status/974534165419892736]
 
 ↑ ぜひ音アリで見てください！
