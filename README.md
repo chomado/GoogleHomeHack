@@ -2,7 +2,8 @@
 
 ちょまどさん ([@chomado](https://twitter.com/chomado)) のような筋肉を感じる声に変えてもらいましょう！       
 
-Google Assistant 系のアプリは Node.js でやってる人が多いのですが、これは C# で書いてます。（私は C# 好き過ぎて Microsoft 入社しました。）
+Google Assistant 系のアプリは Node.js でやってる人が多いのですが、これは C# で書いてます。（私は C# 好き過ぎて Microsoft 入社しました。）     
+(最初は node.js で書いていたのですが、途中で全部消して C# で書き直しました)
 
 
 ## 動作シナリオ
@@ -28,7 +29,7 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 1. [Microsoft Azure](https://aka.ms/azureevajp) の `ファイル置き場` の [Azure Storage](https://azure.microsoft.com/ja-jp/services/storage/) (アジュール・ストレージ)
 
 ## 処理の流れ
-![](img/Architecture.gif)
+![](Img/architecture2.gif)
 
 1. ユーザー「ちょまどだよ！」    
 1. → `Google Assistant`「"ちょまどだよ" って言ったわ」    
