@@ -1,3 +1,4 @@
+
 # Microsoft のサーバーレスのサービス Azure Functions (C#) を使って Google Home 対応アプリ「筋肉ボイス」
 
 ちょまどさん ([@chomado](https://twitter.com/chomado)) のような筋肉を感じる声に変えてもらいましょう！       
@@ -5,6 +6,11 @@
 Google Assistant 系のアプリは Node.js でやってる人が多いのですが、これは C# で書いてます。（私は C# 好き過ぎて Microsoft 入社しました。）     
 (最初は node.js で書いていたのですが、途中で全部消して C# で書き直しました)
 
+## 動作デモ動画
+
+[https://twitter.com/chomado/status/974534165419892736]
+
+↑ ぜひ音アリで見てください！
 
 ## 動作シナリオ
 
