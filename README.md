@@ -1,37 +1,64 @@
-# Google Home Hack
+# Microsoft のサーバーレスのサービス Azure Functions (C#) を使って Google Home 対応アプリ「筋肉ボイス」
 
-Google Home に好きな声で喋らせるものです。     
-(注意) このプロジェクトは clone してもそのまま動きません。APIキーを設定ファイルに書いたりする必要があります。詳しくは下にまとめて書いてあるので読んでください
+ちょまどさん ([@chomado](https://twitter.com/chomado)) のような筋肉を感じる声に変えてもらいましょう！       
 
-## 動作デモ
+Google Assistant 系のアプリは Node.js でやってる人が多いのですが、これは C# で書いてます。（私は C# 好き過ぎて Microsoft 入社しました。）
 
-必ず見てください！80秒間です
 
-[https://twitter.com/chomado/status/953832898842341376]
+## 動作シナリオ
 
-## アーキテクチャ
+````
+ユーザ「OKグーグル、筋肉ボイス」
 
-`開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
+「はい、筋肉ボイスに繋ぎます」
 
-![](Img/architecture.gif)
+ユーザ「私の名前はちょまどです」
+
+(イカツイ声で)「私の名前はちょまどです」
+````
+
+# 構成図（アーキテクチャ）
+
+Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.ms/azureevajp)　(アジュール)」などを使ってるよ！
+
+## 使っているもの：
+1. `自然言語解析エンジン` の `Dialogflow` (一応挟んでるけど、今回は発した言葉のオウム返しなので、あんまり処理は書いてない。Webhook に飛ばす綱渡しのために入れてる)
+1. [Microsoft Azure](https://aka.ms/azureevajp) の `サーバーレス` のサービスである [Azure Functions](https://azure.microsoft.com/ja-jp/services/functions/) (アジュール・ファンクション)。ここで自分の書いたプログラムが動くことになる
+1. 文字列を渡したらそれを任意の声で読み上げてくれる `text to speech`のサービス「[VoiceText Web API](https://cloud.voicetext.jp/webapi)」
+1. [Microsoft Azure](https://aka.ms/azureevajp) の `ファイル置き場` の [Azure Storage](https://azure.microsoft.com/ja-jp/services/storage/) (アジュール・ストレージ)
+
+## 処理の流れ
+![](img/Architecture.gif)
+
+1. ユーザー「ちょまどだよ！」    
+1. → `Google Assistant`「"ちょまどだよ" って言ったわ」    
+1. → `Dialogflow`「Webhook に飛ばすわ」    
+1. → `Azure Functions` に書いた私のコード「"ちょまどだよ"って来たわ。音声変換APIに飛ばすわ」    
+1. → `VoiceText Web API`「mp3 に変換して返すわ」    
+1. → `Azure Functions` に書いた私のコード「mp3来たからクラウド上のストレージに保存しておいて、その保存先のURL貰うわ」    
+1. → `Azure Storage`「保存したよ。アクセスするためのURLはこれだよ https://-----」    
+1. → `Azure Functions` に書いた私のコード「Google Home (の上で動いてる Actions on Google)に mp3 渡して読み上げてもらうわ」     
+1. → `Google Home`「（野太い声で）ちょまどだよ」    
+1. → ユーザ「きゃっきゃっ」
 
 ## 動かすために自分でやること
 
 書いたコードは全て上げていますが、   
 各種使用サービスの APIキーなど、秘密にするべきものはもちろん public に上げていません。
 
-なので、clone 後、以下の手順を踏む必要があります。
+なので、clone 後、以下の手順を踏む必要があります。    
+（この手順書はまだ途中です！あとで完成させます）
 
 1. *声を変える* ために使うサービスのAPIキー入手
     - [VoiceText Web API](https://cloud.voicetext.jp/webapi) の APIキー取得。（最初の画面の「はじめる」から先に進んだら、登録したメアドにAPIキーが届きます）
+2. (注) これから先、処理を動かす場所の確保 & mp3ファイル保存のために、クラウドサービスの [Microsoft Azure](https://aka.ms/azureevajp)(アジュール)を使います。まだアカウントをお持ちでない方は [こちら](https://aka.ms/azureevajp)からトライアル開始できます
 2. VoiceText Web API が吐いた *mp3の保存場所* の接続文字列など入手
     - ラズパイとか用意したり自分でサーバ立てるのが面倒だったので、Microsoft のクラウドサービスを使います。ということで [Microsoft Azure の管理ポータル](http://portal.azure.com)を開きます。
 	- 画面左上の「＋リソースの作成」から、ストレージアカウント (mp3保存場所)のインスタンス立ち上げる
     - ストレージアカウント (mp3保存場所)の APIキー２つ取得（少し分かりにくいと思ったので下にスクショ載せました）
-3. *設定ファイル* 書き換え
-    - APIキーなどが書いてある秘密のファイル(つまり皆に見せちゃダメだよ)の `Keys/APIKeys_sample.json` のファイル名を `APIKeys_sample.json` から `APIKeys.json` に変更。
-    - そしてそのファイルをエディタで開いて中身を書き換える。（上で取得したキー文字列を入れることになる）
-4. `VoiceTextWriter.js` の `OUT_PATH` が、今は私の環境のもの（`/Users/chomado/...`）をべた書きしてるけど、これ自分のものに書き換えてください。
+3. 環境変数の書き換え
+    - ストレージへのアクセスするための秘密の文字列（接続文字列）を、Azure Functions の環境変数一覧の中に登録する
+    - この方法は後で書く！！
 
 ### Azure ポータル上での操作
 
@@ -40,43 +67,6 @@ Google Home に好きな声で喋らせるものです。
 
 ![](Img/ScreenShot/about_storageAccount1.png)
 
-↓ この左の「アクセスキー」をクリックして、以下２か所からコピーして `Keys/APIKeys.json` に貼り付ける。
+↓ この左の「アクセスキー」をクリックして、以下２か所からコピーして メモ帳アプリかどこかに控えておく。
 
 ![](Img/ScreenShot/get_storageAccount_keys.png)
-
-
-## Background
-
-Google Home への接続は `google-home-notifier` パッケージ様を使っています。
-
-これは本当に便利なライブラリで、
-
-例えば、普通に Google Home のお姉さんの声で読み上げて欲しいなら、
-````js
-googlehome.notify('こんにちは、ちょまどです！', function(res) {
-  console.log(res);
-});
-````
-これだけで動きます。
-
-`開発PC` → `Google Home`
-
-しかし、今回、私はたくましい男の人に喋ってほしかったので、[VoiceText Web API](https://cloud.voicetext.jp/webapi)を使用しました。
-
-`開発PC` → `VoiceText Web API`(声変換) → `Microsoft Azure Blob Storage`(mp3保存) → `Google Home`
-
-なので、少しだけ複雑になっていますが、大丈夫です。
-
-![](Img/architecture.gif)
-
-↑ gif アニメ版    
-↓ 静止画版
-
-![](Img/architecture.png)
-
-## Next Step
-
-現在、発火が開発PCから直接 `node main.js` している状態なので、
-
-次は、スマートスピーカーらしく、    
-「Google Home に『声を変えて』と声をかけるなど『声で発火できるように』」させる必要があります
