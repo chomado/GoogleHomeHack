@@ -58,6 +58,9 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 
 [ちょまどさんの筋肉ボイスを動かしてみた](http://satoshi-maemoto.hatenablog.com/entry/2018/05/12/082525)
 
+this article is also great
+[https://sy0690.hateblo.jp/entry/2018/07/29/023933]
+
 ーー
 書いたコードは全て上げていますが、  
 
