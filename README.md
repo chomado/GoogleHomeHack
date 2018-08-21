@@ -56,12 +56,14 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 
 追記：前村さんが記事を書いてくださいました！ありがとうございます！
 
-[ちょまどさんの筋肉ボイスを動かしてみた](http://satoshi-maemoto.hatenablog.com/entry/2018/05/12/082525)
+[ちょまどさんの筋肉ボイスを動かしてみた | つくるの大好きブログ](http://satoshi-maemoto.hatenablog.com/entry/2018/05/12/082525)
 
-this article is also great
-[https://sy0690.hateblo.jp/entry/2018/07/29/023933]
+追記その２：しょうさんが詳しい記事を書いてくださいました！正直この README 読むよりずっと良いですｗ
+
+[ちょまどさんの筋肉ボイス動かしてみた｜SHO Tech Lab ](https://sy0690.hateblo.jp/entry/2018/07/29/023933)
 
 ーー
+
 書いたコードは全て上げていますが、  
 
 各種使用サービスの APIキーなど、秘密にするべきものはもちろん public に上げていません。
@@ -90,3 +92,9 @@ this article is also great
 ↓ この左の「アクセスキー」をクリックして、以下２か所からコピーして メモ帳アプリかどこかに控えておく。
 
 ![](Img/ScreenShot/get_storageAccount_keys.png)
+
+
+また、Google 側からアプリを呼び出すために、     
+これで Azure 側に作ったエンドポイントを Google の Dialogflow の Webhook のエンドポイントに入れておくのが大切です
+
+![](Img/dialogflowwebhook.PNG)
