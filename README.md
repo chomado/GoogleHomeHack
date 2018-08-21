@@ -52,7 +52,18 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 
 ## 動かすために自分でやること
 
-書いたコードは全て上げていますが、   
+ーー
+
+追記：前村さんが記事を書いてくださいました！ありがとうございます！
+
+[ちょまどさんの筋肉ボイスを動かしてみた](http://satoshi-maemoto.hatenablog.com/entry/2018/05/12/082525)
+
+this article is also great
+[https://sy0690.hateblo.jp/entry/2018/07/29/023933]
+
+ーー
+書いたコードは全て上げていますが、  
+
 各種使用サービスの APIキーなど、秘密にするべきものはもちろん public に上げていません。
 
 なので、clone 後、以下の手順を踏む必要があります。    
