@@ -52,6 +52,8 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 
 ## コード解説
 
+メインのプログラムは [/ChomadoVoice/GoogleHome.cs](https://github.com/chomado/GoogleHomeHack/blob/master/ChomadoVoice/GoogleHome.cs) です。
+
 ![](Img/code1.png)
 
 ![](Img/code2.png)
@@ -117,4 +119,4 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 また、Google 側からアプリを呼び出すために、     
 これで Azure 側に作ったエンドポイントを Google の Dialogflow の Webhook のエンドポイントに入れておくのが大切です
 
-![](Img/dialogflowwebhook.PNG)
+![](Img/dialogflowwebhook.png)
