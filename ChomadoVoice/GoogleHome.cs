@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,37 +22,44 @@ namespace ChomadoVoice
             , TraceWriter log
         )
         {
-            log.Info("C# HTTP trigger function processed a request.");
-            var data = await req.Content.ReadAsAsync<Models.DialogFlowResponseModel>();
-            //log.Info(data);
-            var say = data.Result.ResolvedQuery;
-
-            // VoiceText Web API に投げる処理 test
-            var voiceTextClient = new VoiceTextClient
+            try
             {
-                APIKey = Keys.APIKeys.VoiceTextWebApiKey,
-                Speaker = Speaker.Bear,
-                Emotion = Emotion.Anger,
-                EmotionLevel = EmotionLevel.High,
-                Format = Format.MP3
-            };
-            var bytes = await voiceTextClient.GetVoiceAsync(text: say);
+                log.Info("C# HTTP trigger function processed a request.");
+                var data = await req.Content.ReadAsAsync<Models.DialogFlowResponseModel>();
+                //log.Info(data);
+                var say = data.Result.ResolvedQuery;
 
-            // Azure Blob Storage への書き込み（保存）
-            await mp3Out.UploadFromByteArrayAsync(buffer: bytes, index: 0, count: bytes.Length);
+                // VoiceText Web API に投げる処理 test
+                var voiceTextClient = new VoiceTextClient
+                {
+                    APIKey = Keys.APIKeys.VoiceTextWebApiKey,
+                    Speaker = Speaker.Bear,
+                    Emotion = Emotion.Anger,
+                    EmotionLevel = EmotionLevel.High,
+                    Format = Format.MP3
+                };
+                var bytes = await voiceTextClient.GetVoiceAsync(text: say);
 
-            // Azure Blob Storage に書き込まれた mp3 にアクセスするための URL
-            var mp3Url = mp3Out.Uri;
+                // Azure Blob Storage への書き込み（保存）
+                await mp3Out.UploadFromByteArrayAsync(buffer: bytes, index: 0, count: bytes.Length);
 
-            var result = req.CreateResponse(HttpStatusCode.OK, new
+                // Azure Blob Storage に書き込まれた mp3 にアクセスするための URL
+                var mp3Url = mp3Out.Uri;
+
+                var result = req.CreateResponse(HttpStatusCode.OK, new
+                {
+                    // Google Home に喋らせたい文言を渡す。（この場合mp3）
+                    speech = $"<speak><audio src='{mp3Url}' /></speak>",
+                    // Google Assistant のチャット画面上に出したい文字列
+                    displayText = $"「{say}」"
+                });
+                result.Headers.Add("ContentType", "application/json");
+                return result;
+            }
+            catch (Exception ex)
             {
-                // Google Home に喋らせたい文言を渡す。（この場合mp3）
-                speech = $"<speak><audio src='{mp3Url}' /></speak>",
-                // Google Assistant のチャット画面上に出したい文字列
-                displayText = $"「{say}」"
-            });
-            result.Headers.Add("ContentType", "application/json");
-            return result;
+                log.Error("An exception occurred in GoogleHome.Run", ex);
+            }
         }
         
     }
