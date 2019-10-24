@@ -59,6 +59,8 @@ namespace ChomadoVoice
             catch (Exception ex)
             {
                 log.Error("An exception occurred in GoogleHome.Run", ex);
+                var result = req.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                return result;
             }
         }
         
