@@ -26,7 +26,7 @@ namespace ChomadoVoice
             //log.Info(data);
             var say = data.Result.ResolvedQuery;
 
-            // VoiceText Web API に投げる処理
+            // VoiceText Web API に投げる処理 test
             var voiceTextClient = new VoiceTextClient
             {
                 APIKey = Keys.APIKeys.VoiceTextWebApiKey,
