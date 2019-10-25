@@ -25,6 +25,7 @@ namespace ChomadoVoice
             try
             {
                 log.Info("C# HTTP trigger function processed a request.");
+                var json = await req.Content.ReadAsStringAsync();
                 var data = await req.Content.ReadAsAsync<Models.DialogFlowResponseModel>();
                 //log.Info(data);
                 var say = data.Result.ResolvedQuery;
