@@ -10,7 +10,7 @@
     public partial class DialogFlowRequestModel
     {
         [JsonProperty("responseId")]
-        public Guid ResponseId { get; set; }
+        public string ResponseId { get; set; }
 
         [JsonProperty("session")]
         public string Session { get; set; }
