@@ -26,9 +26,11 @@ namespace ChomadoVoice
             {
                 log.Info("C# HTTP trigger function processed a request.");
                 var json = await req.Content.ReadAsStringAsync();
-                var data = await req.Content.ReadAsAsync<Models.DialogFlowResponseModel>();
+                log.Info("Json received: ", json);
+                var data2 = Models.DialogFlowRequestModel.FromJson(json);
+                var data = await req.Content.ReadAsAsync<Models.DialogFlowRequestModel>();
                 //log.Info(data);
-                var say = data.Result.ResolvedQuery;
+                var say = data.QueryResult.QueryText;
 
                 // VoiceText Web API に投げる処理 test
                 var voiceTextClient = new VoiceTextClient
