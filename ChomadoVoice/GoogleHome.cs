@@ -56,7 +56,7 @@ namespace ChomadoVoice
                     {
                         Google = new Models.Google
                         {
-                            ExpectUserResponse = true,
+                            ExpectUserResponse = false,
                             RichResponse = new Models.RichResponse
                             {
                                 Items = new Models.Item[]
