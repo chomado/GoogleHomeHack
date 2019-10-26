@@ -103,7 +103,7 @@
         public static DialogFlowRequestModel FromJson(string json) => JsonConvert.DeserializeObject<DialogFlowRequestModel>(json, ChomadoVoice.Models.Converter.Settings);
     }
 
-    public static class Serialize
+    public static class SerializeRequest
     {
         public static string ToJson(this DialogFlowRequestModel self) => JsonConvert.SerializeObject(self, ChomadoVoice.Models.Converter.Settings);
     }
@@ -120,4 +120,130 @@
             },
         };
     }
+
+
+    public partial class DialogFlowResponseModel
+    {
+        [JsonProperty("fulfillmentText")]
+        public string FulfillmentText { get; set; }
+
+        [JsonProperty("fulfillmentMessages")]
+        public FulfillmentMessage[] FulfillmentMessages { get; set; }
+
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+        [JsonProperty("payload")]
+        public Payload Payload { get; set; }
+
+        [JsonProperty("outputContexts")]
+        public OutputContext[] OutputContexts { get; set; }
+
+        [JsonProperty("followupEventInput")]
+        public FollowupEventInput FollowupEventInput { get; set; }
+    }
+
+    public partial class FollowupEventInput
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("languageCode")]
+        public string LanguageCode { get; set; }
+
+        [JsonProperty("parameters")]
+        public Parameters Parameters { get; set; }
+    }
+
+    public partial class FulfillmentMessage
+    {
+        [JsonProperty("card")]
+        public Card Card { get; set; }
+    }
+
+    public partial class Card
+    {
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        [JsonProperty("subtitle")]
+        public string Subtitle { get; set; }
+
+        [JsonProperty("imageUri")]
+        public Uri ImageUri { get; set; }
+
+        [JsonProperty("buttons")]
+        public Button[] Buttons { get; set; }
+    }
+
+    public partial class Button
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("postback")]
+        public Uri Postback { get; set; }
+    }
+
+    public partial class Payload
+    {
+        [JsonProperty("google")]
+        public Google Google { get; set; }
+
+        [JsonProperty("facebook")]
+        public Facebook Facebook { get; set; }
+
+        [JsonProperty("slack")]
+        public Facebook Slack { get; set; }
+    }
+
+    public partial class Facebook
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+    }
+
+    public partial class Google
+    {
+        [JsonProperty("expectUserResponse")]
+        public bool ExpectUserResponse { get; set; }
+
+        [JsonProperty("richResponse")]
+        public RichResponse RichResponse { get; set; }
+    }
+
+    public partial class RichResponse
+    {
+        [JsonProperty("items")]
+        public Item[] Items { get; set; }
+    }
+
+    public partial class Item
+    {
+        [JsonProperty("simpleResponse")]
+        public SimpleResponse SimpleResponse { get; set; }
+    }
+
+    public partial class SimpleResponse
+    {
+        [JsonProperty("textToSpeech")]
+        public string TextToSpeech { get; set; }
+
+        [JsonProperty("ssml")]
+        public string SSML { get; set; }
+
+        [JsonProperty("display_text")]
+        public string DisplayText { get; set; }
+    }
+
+    public partial class DialogFlowResponseModel
+    {
+        public static DialogFlowResponseModel FromJson(string json) => JsonConvert.DeserializeObject<DialogFlowResponseModel>(json, ChomadoVoice.Models.Converter.Settings);
+    }
+
+    public static class SerializeResponse
+    {
+        public static string ToJson(this DialogFlowResponseModel self) => JsonConvert.SerializeObject(self, ChomadoVoice.Models.Converter.Settings);
+    }
+
 }

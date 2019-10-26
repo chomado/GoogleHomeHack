@@ -48,14 +48,35 @@ namespace ChomadoVoice
 
                 // Azure Blob Storage に書き込まれた mp3 にアクセスするための URL
                 var mp3Url = mp3Out.Uri;
-
-                var result = req.CreateResponse(HttpStatusCode.OK, new
+                //At least with DialogFlow v2, webhook responses from here back to DialogFlow now need to be in a standard format. 
+                //See https://developers.google.com/assistant/actions/build/json/dialogflow-webhook-json and https://cloud.google.com/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#webhookresponse
+                var response = new Models.DialogFlowResponseModel
                 {
-                    // Google Home に喋らせたい文言を渡す。（この場合mp3）
-                    speech = $"<speak><audio src='{mp3Url}' /></speak>",
-                    // Google Assistant のチャット画面上に出したい文字列
-                    displayText = $"「{say}」"
-                });
+                    Payload = new Models.Payload
+                    {
+                        Google = new Models.Google
+                        {
+                            ExpectUserResponse = true,
+                            RichResponse = new Models.RichResponse
+                            {
+                                Items = new Models.Item[]
+                                {
+                                    new Models.Item
+                                    {
+                                        SimpleResponse = new Models.SimpleResponse
+                                        {
+                                            // Google Home に喋らせたい文言を渡す。（この場合mp3）
+                                            SSML = $"<speak><audio src='{mp3Url}' /></speak>",
+                                            // Google Assistant のチャット画面上に出したい文字列
+                                            DisplayText = $"「{say}」"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+                var result = req.CreateResponse(HttpStatusCode.OK, response);
                 result.Headers.Add("ContentType", "application/json");
                 return result;
             }
