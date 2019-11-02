@@ -25,9 +25,6 @@ namespace ChomadoVoice
             try
             {
                 log.Info("C# HTTP trigger function processed a request.");
-                var json = await req.Content.ReadAsStringAsync();
-                log.Info("Json received: ", json);
-                var data2 = Models.DialogFlowRequestModel.FromJson(json);
                 var data = await req.Content.ReadAsAsync<Models.DialogFlowRequestModel>();
                 //log.Info(data);
                 var say = data.QueryResult.QueryText;
@@ -48,7 +45,7 @@ namespace ChomadoVoice
 
                 // Azure Blob Storage に書き込まれた mp3 にアクセスするための URL
                 var mp3Url = mp3Out.Uri;
-                //At least with DialogFlow v2, webhook responses from here back to DialogFlow now need to be in a standard format. 
+                //DialogFlow v2 では、DialogFlow へのwebhookの応答メッセージ　標準データ形式である必要がある。
                 //See https://developers.google.com/assistant/actions/build/json/dialogflow-webhook-json and https://cloud.google.com/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#webhookresponse
                 var response = new Models.DialogFlowResponseModel
                 {
