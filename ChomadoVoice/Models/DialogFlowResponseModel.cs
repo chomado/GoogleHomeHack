@@ -1,290 +1,249 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-
-namespace ChomadoVoice.Models
+﻿namespace ChomadoVoice.Models
 {
-    /// <summary>
-    /// DialogFlow から渡ってくる JSON をパースする用
-    /// </summary>
-    public class DialogFlowResponseModel
+    using System;
+    using System.Collections.Generic;
+
+    using System.Globalization;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+
+    public partial class DialogFlowRequestModel
     {
-        [JsonProperty("originalRequest")]
-        public OriginalRequest OriginalRequest { get; set; }
+        [JsonProperty("responseId")]
+        public string ResponseId { get; set; }
 
-        [JsonProperty("id")]
-        public string Id { get; set; }
+        [JsonProperty("session")]
+        public string Session { get; set; }
 
-        [JsonProperty("timestamp")]
-        public System.DateTimeOffset Timestamp { get; set; }
+        [JsonProperty("queryResult")]
+        public QueryResult QueryResult { get; set; }
 
-        [JsonProperty("lang")]
-        public string Lang { get; set; }
-
-        [JsonProperty("result")]
-        public Result Result { get; set; }
-
-        [JsonProperty("status")]
-        public Status Status { get; set; }
-
-        [JsonProperty("sessionId")]
-        public string SessionId { get; set; }
+        [JsonProperty("originalDetectIntentRequest")]
+        public OriginalDetectIntentRequest OriginalDetectIntentRequest { get; set; }
     }
 
-    public partial class OriginalRequest
+    public partial class OriginalDetectIntentRequest
     {
-        [JsonProperty("source")]
-        public string Source { get; set; }
-
-        [JsonProperty("version")]
-        public string Version { get; set; }
-
-        [JsonProperty("data")]
-        public Data Data { get; set; }
     }
 
-    public partial class Data
+    public partial class QueryResult
     {
-        [JsonProperty("isInSandbox")]
-        public bool IsInSandbox { get; set; }
+        [JsonProperty("queryText")]
+        public string QueryText { get; set; }
 
-        [JsonProperty("surface")]
-        public Urface Surface { get; set; }
+        [JsonProperty("parameters")]
+        public Parameters Parameters { get; set; }
 
-        [JsonProperty("inputs")]
-        public Input[] Inputs { get; set; }
+        [JsonProperty("allRequiredParamsPresent")]
+        public bool AllRequiredParamsPresent { get; set; }
 
-        [JsonProperty("user")]
-        public User User { get; set; }
+        [JsonProperty("fulfillmentText")]
+        public string FulfillmentText { get; set; }
 
-        [JsonProperty("conversation")]
-        public Conversation Conversation { get; set; }
+        [JsonProperty("fulfillmentMessages")]
+        public FulfillmentMessage[] FulfillmentMessages { get; set; }
 
-        [JsonProperty("availableSurfaces")]
-        public Urface[] AvailableSurfaces { get; set; }
-    }
-
-    public partial class Urface
-    {
-        [JsonProperty("capabilities")]
-        public Capability[] Capabilities { get; set; }
-    }
-
-    public partial class Capability
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public partial class Conversation
-    {
-        [JsonProperty("conversationId")]
-        public string ConversationId { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("conversationToken")]
-        public string ConversationToken { get; set; }
-    }
-
-    public partial class Input
-    {
-        [JsonProperty("rawInputs")]
-        public RawInput[] RawInputs { get; set; }
-
-        [JsonProperty("arguments")]
-        public Argument[] Arguments { get; set; }
+        [JsonProperty("outputContexts")]
+        public OutputContext[] OutputContexts { get; set; }
 
         [JsonProperty("intent")]
-        public string Intent { get; set; }
+        public Intent Intent { get; set; }
+
+        [JsonProperty("intentDetectionConfidence")]
+        public long IntentDetectionConfidence { get; set; }
+
+        [JsonProperty("diagnosticInfo")]
+        public OriginalDetectIntentRequest DiagnosticInfo { get; set; }
+
+        [JsonProperty("languageCode")]
+        public string LanguageCode { get; set; }
     }
 
-    public partial class Argument
+    public partial class FulfillmentMessage
     {
-        [JsonProperty("rawText")]
-        public string RawText { get; set; }
+        [JsonProperty("text")]
+        public Text Text { get; set; }
+    }
 
-        [JsonProperty("textValue")]
-        public string TextValue { get; set; }
+    public partial class Text
+    {
+        [JsonProperty("text")]
+        public string[] TextText { get; set; }
+    }
 
+    public partial class Intent
+    {
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("displayName")]
+        public string DisplayName { get; set; }
     }
 
-    public partial class RawInput
+    public partial class OutputContext
     {
-        [JsonProperty("query")]
-        public string Query { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        [JsonProperty("inputType")]
-        public string InputType { get; set; }
-    }
-
-    public partial class User
-    {
-        [JsonProperty("lastSeen")]
-        public System.DateTimeOffset LastSeen { get; set; }
-
-        [JsonProperty("locale")]
-        public string Locale { get; set; }
-
-        [JsonProperty("userId")]
-        public string UserId { get; set; }
-    }
-
-    public partial class Result
-    {
-        [JsonProperty("source")]
-        public string Source { get; set; }
-
-        [JsonProperty("resolvedQuery")]
-        public string ResolvedQuery { get; set; }
-
-        [JsonProperty("speech")]
-        public string Speech { get; set; }
-
-        [JsonProperty("action")]
-        public string Action { get; set; }
-
-        [JsonProperty("actionIncomplete")]
-        public bool ActionIncomplete { get; set; }
+        [JsonProperty("lifespanCount")]
+        public long LifespanCount { get; set; }
 
         [JsonProperty("parameters")]
-        public ResultParameters Parameters { get; set; }
-
-        [JsonProperty("contexts")]
-        public Context[] Contexts { get; set; }
-
-        [JsonProperty("metadata")]
-        public Metadata Metadata { get; set; }
-
-        [JsonProperty("fulfillment")]
-        public Fulfillment Fulfillment { get; set; }
-
-        [JsonProperty("score")]
-        public double Score { get; set; }
+        public Parameters Parameters { get; set; }
     }
 
-    public partial class Context
+    public partial class Parameters
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("parameters")]
-        public JObject Parameters { get; set; }
-
-        [JsonProperty("lifespan")]
-        public long Lifespan { get; set; }
+        [JsonProperty("param")]
+        public string Param { get; set; }
     }
-    
-    public partial class Fulfillment
+
+    public partial class DialogFlowRequestModel
     {
-        [JsonProperty("speech")]
-        public string Speech { get; set; }
-
-        [JsonProperty("messages")]
-        public Message[] Messages { get; set; }
+        public static DialogFlowRequestModel FromJson(string json) => JsonConvert.DeserializeObject<DialogFlowRequestModel>(json, ChomadoVoice.Models.Converter.Settings);
     }
 
-    public partial class Message
+    public static class SerializeRequest
     {
-        [JsonProperty("type")]
-        public long Type { get; set; }
-
-        [JsonProperty("speech")]
-        public string Speech { get; set; }
+        public static string ToJson(this DialogFlowRequestModel self) => JsonConvert.SerializeObject(self, ChomadoVoice.Models.Converter.Settings);
     }
 
-    public partial class Metadata
-    {
-        [JsonProperty("matchedParameters")]
-        public MatchedParameter[] MatchedParameters { get; set; }
-
-        [JsonProperty("intentName")]
-        public string IntentName { get; set; }
-
-        [JsonProperty("isResponseToSlotfilling")]
-        public bool IsResponseToSlotfilling { get; set; }
-
-        [JsonProperty("intentId")]
-        public string IntentId { get; set; }
-
-        [JsonProperty("webhookUsed")]
-        public string WebhookUsed { get; set; }
-
-        [JsonProperty("webhookForSlotFillingUsed")]
-        public string WebhookForSlotFillingUsed { get; set; }
-
-        [JsonProperty("nluResponseTime")]
-        public long NluResponseTime { get; set; }
-    }
-
-    public partial class MatchedParameter
-    {
-        [JsonProperty("required")]
-        public bool Required { get; set; }
-
-        [JsonProperty("dataType")]
-        public string DataType { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("value")]
-        public string Value { get; set; }
-
-        [JsonProperty("isList")]
-        public bool IsList { get; set; }
-    }
-
-    public partial class ResultParameters
-    {
-        [JsonProperty("objective")]
-        public string Objective { get; set; }
-
-        [JsonProperty("Verb")]
-        public string Verb { get; set; }
-    }
-
-    public partial class Status
-    {
-        [JsonProperty("code")]
-        public long Code { get; set; }
-
-        [JsonProperty("errorType")]
-        public string ErrorType { get; set; }
-
-        [JsonProperty("webhookTimedOut")]
-        public bool WebhookTimedOut { get; set; }
-    }
-
-    public partial class Welcome
-    {
-        public static Welcome FromJson(string json) => JsonConvert.DeserializeObject<Welcome>(json, Converter.Settings);
-    }
-
-    public static class Serialize
-    {
-        public static string ToJson(this Welcome self) => JsonConvert.SerializeObject(self, Converter.Settings);
-    }
-
-    internal class Converter
+    internal static class Converter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,
-            Converters = {
+            Converters =
+            {
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
     }
+
+
+    public partial class DialogFlowResponseModel
+    {
+        [JsonProperty("fulfillmentText")]
+        public string FulfillmentText { get; set; }
+
+        [JsonProperty("fulfillmentMessages")]
+        public FulfillmentMessage[] FulfillmentMessages { get; set; }
+
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+        [JsonProperty("payload")]
+        public Payload Payload { get; set; }
+
+        [JsonProperty("outputContexts")]
+        public OutputContext[] OutputContexts { get; set; }
+
+        [JsonProperty("followupEventInput")]
+        public FollowupEventInput FollowupEventInput { get; set; }
+    }
+
+    public partial class FollowupEventInput
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("languageCode")]
+        public string LanguageCode { get; set; }
+
+        [JsonProperty("parameters")]
+        public Parameters Parameters { get; set; }
+    }
+
+    public partial class FulfillmentMessage
+    {
+        [JsonProperty("card")]
+        public Card Card { get; set; }
+    }
+
+    public partial class Card
+    {
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        [JsonProperty("subtitle")]
+        public string Subtitle { get; set; }
+
+        [JsonProperty("imageUri")]
+        public Uri ImageUri { get; set; }
+
+        [JsonProperty("buttons")]
+        public Button[] Buttons { get; set; }
+    }
+
+    public partial class Button
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+
+        [JsonProperty("postback")]
+        public Uri Postback { get; set; }
+    }
+
+    public partial class Payload
+    {
+        [JsonProperty("google")]
+        public Google Google { get; set; }
+
+        [JsonProperty("facebook")]
+        public Facebook Facebook { get; set; }
+
+        [JsonProperty("slack")]
+        public Facebook Slack { get; set; }
+    }
+
+    public partial class Facebook
+    {
+        [JsonProperty("text")]
+        public string Text { get; set; }
+    }
+
+    public partial class Google
+    {
+        [JsonProperty("expectUserResponse")]
+        public bool ExpectUserResponse { get; set; }
+
+        [JsonProperty("richResponse")]
+        public RichResponse RichResponse { get; set; }
+    }
+
+    public partial class RichResponse
+    {
+        [JsonProperty("items")]
+        public Item[] Items { get; set; }
+    }
+
+    public partial class Item
+    {
+        [JsonProperty("simpleResponse")]
+        public SimpleResponse SimpleResponse { get; set; }
+    }
+
+    public partial class SimpleResponse
+    {
+        [JsonProperty("textToSpeech")]
+        public string TextToSpeech { get; set; }
+
+        [JsonProperty("ssml")]
+        public string SSML { get; set; }
+
+        [JsonProperty("display_text")]
+        public string DisplayText { get; set; }
+    }
+
+    public partial class DialogFlowResponseModel
+    {
+        public static DialogFlowResponseModel FromJson(string json) => JsonConvert.DeserializeObject<DialogFlowResponseModel>(json, ChomadoVoice.Models.Converter.Settings);
+    }
+
+    public static class SerializeResponse
+    {
+        public static string ToJson(this DialogFlowResponseModel self) => JsonConvert.SerializeObject(self, ChomadoVoice.Models.Converter.Settings);
+    }
+
 }
