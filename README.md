@@ -32,9 +32,9 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
 
 ## 使っているもの：
 1. `自然言語解析エンジン` の `Dialogflow` (一応挟んでるけど、今回は発した言葉のオウム返しなので、あんまり処理は書いてない。Webhook に飛ばす綱渡しのために入れてる)
-1. [Microsoft Azure](https://aka.ms/azureevajp) の `サーバーレス` のサービスである [Azure Functions](https://azure.microsoft.com/ja-jp/services/functions/) (アジュール・ファンクション)。ここで自分の書いたプログラムが動くことになる
+1. [Microsoft Azure](https://aka.ms/azureevajp) の `サーバーレス` のサービスである [Azure Functions](https://azure.microsoft.com/services/functions/?WT.mc_id=dotnet-0000-machiy) (アジュール・ファンクション)。ここで自分の書いたプログラムが動くことになる
 1. 文字列を渡したらそれを任意の声で読み上げてくれる `text to speech`のサービス「[VoiceText Web API](https://cloud.voicetext.jp/webapi)」
-1. [Microsoft Azure](https://aka.ms/azureevajp) の `ファイル置き場` の [Azure Storage](https://azure.microsoft.com/ja-jp/services/storage/) (アジュール・ストレージ)
+1. [Microsoft Azure](https://aka.ms/azureevajp) の `ファイル置き場` の [Azure Storage](https://azure.microsoft.com/services/storage/?WT.mc_id=dotnet-0000-machiy) (アジュール・ストレージ)
 
 ## 処理の流れ
 ![](Img/architecture2.gif)
@@ -96,7 +96,7 @@ Microsoft のクラウドサービスである「[Microsoft Azure](https://aka.m
     - [VoiceText Web API](https://cloud.voicetext.jp/webapi) の APIキー取得。（最初の画面の「はじめる」から先に進んだら、登録したメアドにAPIキーが届きます）
 2. (注) これから先、処理を動かす場所の確保 & mp3ファイル保存のために、クラウドサービスの [Microsoft Azure](https://aka.ms/azureevajp)(アジュール)を使います。まだアカウントをお持ちでない方は [こちら](https://aka.ms/azureevajp)からトライアル開始できます
 2. VoiceText Web API が吐いた *mp3の保存場所* の接続文字列など入手
-    - ラズパイとか用意したり自分でサーバ立てるのが面倒だったので、Microsoft のクラウドサービスを使います。ということで [Microsoft Azure の管理ポータル](http://portal.azure.com)を開きます。
+    - ラズパイとか用意したり自分でサーバ立てるのが面倒だったので、Microsoft のクラウドサービスを使います。ということで [Microsoft Azure の管理ポータル](https://portal.azure.com/?WT.mc_id=dotnet-0000-machiy)を開きます。
 	- 画面左上の「＋リソースの作成」から、ストレージアカウント (mp3保存場所)のインスタンス立ち上げる
     - ストレージアカウント (mp3保存場所)の APIキー２つ取得（少し分かりにくいと思ったので下にスクショ載せました）
 3. 環境変数の書き換え
